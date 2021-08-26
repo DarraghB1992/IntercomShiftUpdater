@@ -1,7 +1,6 @@
 import os
 import json
 import datetime as dt
-
 import requests
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
