@@ -1,0 +1,5 @@
+token.json
+.DS_Store
+venv/
+.idea/
+scratch.py
