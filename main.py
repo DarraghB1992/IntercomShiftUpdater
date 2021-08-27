@@ -6,13 +6,12 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 # Google Sheets Setup
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets', ]
+SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SERVICE_ACCOUNT_FILE = 'token.json'
 credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 SPREADSHEET_ID = os.environ.get('SpreadsheetID')
 service = build('sheets', 'v4', credentials=credentials)
 sheet = service.spreadsheets()
-result = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range='Hours!A2:Z100').execute()
 
 # Intercom Setup
 AccessToken = os.environ.get('AccessToken')
@@ -26,7 +25,6 @@ headers = {
 
 def get_shift_information():
     google_sheet = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range='Hours!A2:Z100').execute()
-    print(google_sheet)
     admin_info = google_sheet['values']
     for admin in admin_info:
         admin_id = admin[2]
@@ -45,7 +43,6 @@ def check_hours(admin_start_hour, admin_finish_hour, admin_id):
 
 
 def set_admin_as_online(admin_id):
-    admin_id = admin_id
     set_online_params = {
         'away_mode_enabled': False,
         'away_mode_reassign': False,
@@ -55,7 +52,6 @@ def set_admin_as_online(admin_id):
 
 
 def set_admin_as_away(admin_id):
-    admin_id = admin_id
     set_offline_params = {
         'away_mode_enabled': True,
         'away_mode_reassign': True,
