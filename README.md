@@ -1,0 +1,1 @@
+# Code from post on https://www.intercomtips.com/post/automate-away-mode-in-intercom/
